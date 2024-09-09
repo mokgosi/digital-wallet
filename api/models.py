@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 class User(models.Model):
@@ -12,35 +13,42 @@ class User(models.Model):
         return self.username
     
     
-class Account(models.Model):    
+class Account(models.Model): 
+    uuid = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE)
     account_number = models.PositiveIntegerField(unique=True)
     balance = models.models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
-    owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE)
-    
-    
-class Withdrawal(models.Model):
-    amount = models.FloatField()
-    account = models.ForeignKey('Account', related_name='accounts', on_delete=models.CASCADE)
-    
-    
-class Deposit(models.Model):
-    amount = models.FloatField()
-    account = models.ForeignKey('Account', related_name='accounts', on_delete=models.CASCADE)
-    
-class Transfers(models.Model):
-    amount = models.FloatField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
     
 TRANSACTION_TYPES = (
     (DEPOSIT, "Deposit"),
     (WITHDRAWAL, "Withdrawal"),
     (TRANSFER, "Transfer"),
 )
+
+TRANSACTION_STATUSES = (
+    (PENDING, "Pending"),
+    (SUCCESS, "Success"),
+    (FAIL, "Fail"),
+)
     
 class TransactionHistory(models.Model):
     account = models.ForeignKey(Account, related_name='transactions', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     balance_after_transaction = models.DecimalField(max_digits=12, decimal_places=2)
-    transaction_type = models.PositiveSmallIntegerField(choices=TRANSACTION_TYPES)  
+    transaction_type = models.CharField(
+        max_length=100,
+        choices=TRANSACTION_TYPES)  
+    status = models.CharField(
+        max_length=100,
+        choices=TRANSACTION_STATUSES)  
+    date = models.DateField()
             
     
     
