@@ -7,13 +7,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-class AccountSerializer(serializers.ModelSerial):
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fileds = '__all__'
+        fields = '__all__'
         
         
-class TransactionHistorySerializer(serializers.ModelSerial):
+class TransactionHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = TransactionHistory
         fields = '__all__'
