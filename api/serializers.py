@@ -11,12 +11,15 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = '__all__'
-        
+     
+    account_number = serializers.CharField(max_length=100, read_only=True)   
         
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
+        
+    balance_after_transaction = serializers.CharField(max_length=100, read_only=True)
         
 class RegisterUserSerializer(serializers.ModelSerializer):
     

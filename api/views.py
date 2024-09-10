@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from .forms import UserRegistrationForm
+import random
 
 # Create your views here.
 class UserList(generics.ListCreateAPIView):
@@ -13,6 +14,19 @@ class UserList(generics.ListCreateAPIView):
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+    
+    def post(self, request):
+        account = Account.objects.create(
+            account_number = random.randrange(1111111111, 9999999999),
+            owner = User.objects.get(pk=request.data['owner']),
+            balance = request.data['balance']
+        )
+
+        serializer = AccountSerializer(account)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+    
+    
+    
     
 class TransactionList(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
