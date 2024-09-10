@@ -15,7 +15,7 @@ class User(AbstractUser):
     last_name = models.CharField(_("last name"), max_length=150, blank=False)
     verified = models.BooleanField(_("verified"), default=False)
     
-    USERNAME_FIELD = "username"
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     
     objects = CustomUserManager()
@@ -55,7 +55,7 @@ TRANSACTION_STATUSES = (
     ("Fail", "Fail"),
 )
     
-class TransactionHistory(models.Model):
+class Transaction(models.Model):
     initiator_account = models.ForeignKey(
         Account, 
         related_name='initiator', 
@@ -79,7 +79,7 @@ class TransactionHistory(models.Model):
     
     
     class Meta:
-        verbose_name_plural = "Transaction History"
+        verbose_name_plural = "Transactions"
             
     
     

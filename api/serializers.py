@@ -13,17 +13,20 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-class TransactionHistorySerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TransactionHistory
+        model = Transaction
         fields = '__all__'
         
 class RegisterUserSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(max_length=100, write_only=True)
+    
+    confirm_password = serializers.CharField(max_length=100, read_only=True)
+    
     
     class Meta:
         model = User 
-        # fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password']
+        extra_kwargs = {'password': {'write_only': True}}
         
         def create(self, validated_data):
             user = User.objects.create_user(

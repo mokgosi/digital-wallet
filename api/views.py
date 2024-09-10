@@ -14,19 +14,19 @@ class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     
-class TransactionHistoryList(generics.ListCreateAPIView):
-    queryset = TransactionHistory.objects.all()
-    serializer_class = AccountSerializer    
+class TransactionList(generics.ListCreateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer    
 
 class RegisterUserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
+    permission_classes = (permissions.AllowAny,)
     
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            
             return Response(
                 {'user': UserSerializer(user, context=self.get_serializer_context()).data}, 
                 status=status.HTTP_201_CREATED) 
