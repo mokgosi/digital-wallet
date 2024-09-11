@@ -19,14 +19,15 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = '__all__'
         
+        
+        
 class RegisterUserSerializer(serializers.ModelSerializer):
     
     confirm_password = serializers.CharField(max_length=100, read_only=True)
     
-    
     class Meta:
         model = User 
-        fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password', '']
         extra_kwargs = {'password': {'write_only': True}}
         
         def create(self, validated_data):

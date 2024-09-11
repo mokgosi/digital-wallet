@@ -1,0 +1,12 @@
+GET http://127.0.0.1:8000/api/accounts
+
+###
+
+POST http://127.0.0.1:8000/api/accounts
+Content-Type: application/json
+
+{
+    "amount": "3000.00"
+    "owner": "1" 
+}
+
