@@ -8,7 +8,7 @@ import uuid
 
 # Create your models here.
 class User(AbstractUser):
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(_("username"), max_length=150, blank=False, unique=True)
     email = models.EmailField(_("email address"), blank=False, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=False)
@@ -16,7 +16,7 @@ class User(AbstractUser):
     verified = models.BooleanField(_("verified"), default=False)
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
     
     objects = CustomUserManager()
     
@@ -32,10 +32,7 @@ class Account(models.Model):
     )
     owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE)
     account_number = models.PositiveIntegerField(unique=True)
-    balance = models.DecimalField(
-        default=0.00, 
-        max_digits=10, 
-        decimal_places=2)
+    balance = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -56,23 +53,15 @@ TRANSACTION_STATUSES = (
 )
     
 class Transaction(models.Model):
-    initiator_account = models.ForeignKey(
-        Account, 
-        related_name='initiator', 
-        on_delete=models.CASCADE)
-    destination_account = models.ForeignKey(
-        Account, 
-        related_name='destination', 
-        on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, related_name='account', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    balance_after_transaction = models.DecimalField(max_digits=12, decimal_places=2)
-    transaction_type = models.CharField(
-        max_length=100,
-        choices=TRANSACTION_TYPES)  
-    status = models.CharField(
-        max_length=100,
-        choices=TRANSACTION_STATUSES)  
+    transaction_type = models.CharField(max_length=100, choices=TRANSACTION_TYPES)  
+    status = models.CharField(max_length=100, choices=TRANSACTION_STATUSES)  
     date = models.DateField()
+    
+    # receiver = models.ForeignKey(User, related_name='receiver', on_delete=models.PROTECT, default='')
+    # creator = models.ForeignKey(User, related_name='creator', on_delete=models.PROTECT, default='')
+
     
     def __str__(self) -> str:
         return str(self.id)

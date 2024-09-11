@@ -1,0 +1,44 @@
+version: "3"
+services: 
+  web:
+    build: .
+    command: bash -c "python manage.py runserver 0.0.0.0:8080"
+    container_name: wallets_api
+    restart: always
+    volumes:
+      - .:/wallets
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - wallets_net
+
+  postgres:
+    container_name: wallets_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+      PGDATE: /data/wallets_postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres:/data/wallets_postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - wallets_net
+
+networks:
+  wallets_net:
+    driver: bridge
+
+volumes:
+  postgres:
