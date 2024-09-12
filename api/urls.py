@@ -6,7 +6,8 @@ urlpatterns = [
     # path('api/<str:username>', views.UserRetrieveUpdateDestroy.as_view(), name='user-retrieve-update-destroy'),
     
     path('api/accounts', views.AccountList.as_view(), name='account-list'),
-    path('api/accounts/<int:account_number>', views.AccountRetrieveDestroy.as_view(), name='account-retrieve-destroy'),
+    path('api/accounts/<int:account_number>', views.AccountRetrieveUpdateDestroy.as_view(), name='account-retrieve-destroy'),
+    path('api/accounts/<int:account_number>/transactions', views.TransactionRetrieveUpdateDestroy.as_view(), name='account-transactions-retrieve-destroy'),
     
     path('api/transactions', views.TransactionList.as_view(), name='transactions-history-list'),
     

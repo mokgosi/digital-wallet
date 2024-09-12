@@ -29,7 +29,7 @@ class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
     def post(self, request):
         account = Account.objects.create(
@@ -41,11 +41,16 @@ class AccountList(generics.ListCreateAPIView):
         serializer = AccountSerializer(account)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     
-class AccountRetrieveDestroy(generics.RetrieveDestroyAPIView): 
+class AccountRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView): 
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     lookup_field = 'account_number'
     
+    
+class TransactionRetrieveUpdateDestroy(generics.ListCreateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer 
+    lookup_field = 'account.account_number'
     
     
 class TransactionList(generics.ListCreateAPIView):

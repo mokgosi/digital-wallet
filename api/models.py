@@ -30,7 +30,7 @@ class Account(models.Model):
         default=uuid.uuid4,
         editable=False
     )
-    owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE)
+    owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE, editable=False)
     account_number = models.PositiveIntegerField(unique=True)
     balance = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)

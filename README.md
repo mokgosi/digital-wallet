@@ -9,7 +9,7 @@
 - Git & Github
 
 - React 18.3.1
-- Tailwindcss 3.4.7
+- Bootstrap
 - TypeScript
 - Node 20.10.0
 - NPM 10.8.1
@@ -27,7 +27,7 @@ Run the following command to install the dependencies:
 
 ```
 $ pip install -r requirements.txt
-$ 
+$ npm install
 ```
 
 Run the following migrations commands:
@@ -42,9 +42,12 @@ Run the following command to run the server:
 
 ```
 $ python manage.py runserver
+$ npm start
 ```
 
-Launch the app here:  http://127.0.0.1:8000/
+Launch the front-end app http://127.0.0.1:3000/
+
+Launch api browsable here:  http://127.0.0.1:8000/
 
 API Endpoints:
 
