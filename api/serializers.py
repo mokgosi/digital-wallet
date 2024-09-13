@@ -9,34 +9,39 @@ class UserSerializer(serializers.ModelSerializer):
         
 class AccountSerializer(serializers.ModelSerializer):
     
-    account_holder = UserSerializer()
+    # account_holder = UserSerializer()
     account_number = serializers.CharField(max_length=100, read_only=True)
     
     class Meta:
         model = Account
         fields = ['id', 'account_holder', 'account_number', 'balance', 'created', 'updated']
         depth = 1
+  
+class AccountReadOnlySerializer(serializers.ModelSerializer):
+
+    account_number = serializers.CharField(max_length=100, read_only=True)
+    transactions = serializers.SerializerMethodField(method_name='get_transactions')
+    
+    class Meta:
+        model = Account
+        fields = ['id', 'account_holder', 'account_number', 'balance', 'transactions', 'created', 'updated']
+        depth = 1
         
-    # def get_transactions(self, obj):
-    #     print(self.context['request'])
-    #     trasactions = Transaction.objects.filter(account=self.context[''], account1=obj)
-    #     return TransactionSerializer(trasactions , many=True).data
+    def get_transactions(self, obj):
+        trasactions = Transaction.objects.filter(account=obj)
+        return TransactionSerializer(trasactions , many=True).data
     
     
 class TransactionSerializer(serializers.ModelSerializer):
     
-    # account = AccountSerializer()
     account = serializers.StringRelatedField()
     receiver = serializers.StringRelatedField()
-    print(account)
     
     class Meta:
         model = Transaction
         fields = ['id', 'amount', 'transaction_type', 'status', 'account', 'receiver', 'date']
-
-        depth = 1        
+        # depth = 1        
     
-        
     
         
         

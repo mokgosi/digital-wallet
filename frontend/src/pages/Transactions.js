@@ -41,8 +41,8 @@ export const Transactions = () => {
                         <ul className="list-group list-group-flush">
                             {transactionsData.map((item,key) => (
                             <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
-                                <span className={`mr-2`}>{item.account.account_number}</span>
-                                <span className={`mr-2`}>{item.transactions_type}</span>
+                                <span className={`mr-2`}>{item.account}</span>
+                                <span className={`mr-2`}>{item.transaction_type}</span>
                                 <span className={`mr-2`}>{item.amount}</span>
                                 <span className={`mr-2`}>{item.date}</span>
                                 <span>

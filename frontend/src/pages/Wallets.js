@@ -75,7 +75,7 @@ export const Wallets = () => {
                         <ul className="list-group list-group-flush">
                             {walletsData.map((item,key) => (
                             <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
-                                <span className={`mr-2`}>{item.owner.first_name} {item.owner.last_name}</span>
+                                <span className={`mr-2`}>{item.account_holder.first_name} {item.account_holder.last_name}</span>
                                 <span className={`mr-2`}><a href=''>{item.account_number}</a></span>
                                 <span className={`mr-2`}>{item.balance}</span>
                                 <span>

@@ -43,7 +43,7 @@ class AccountList(generics.ListCreateAPIView):
     
 class AccountRetrieveDestroy(generics.RetrieveDestroyAPIView): 
     queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = AccountReadOnlySerializer
     lookup_field = 'account_number'
     
     

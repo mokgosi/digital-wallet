@@ -54,6 +54,7 @@ API Endpoints:
 http://127.0.0.1:8000/api/
 http://127.0.0.1:8000/api/<username>
 http://127.0.0.1:8000/api/accounts
+http://127.0.0.1:8000/api/accounts/<account_number>
 http://127.0.0.1:8000/api/transactions
 http://127.0.0.1:8000/api/register
 
