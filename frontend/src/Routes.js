@@ -1,16 +1,22 @@
-// import {
-//     BrowserRouter as Router,
-//     Routes,
-//     Route,
-//   } from "react-router-dom";
-  
-// export const Routes = () => {
+import {
+    BrowserRouter as Router, Routes, Route,
+  } from "react-router-dom";
 
-//     return (
-//         <Router>
-//             <Switch>
-//                 <Route exact path="/" element={<home></home>}></Route>
-//             </Switch>
-//         </Router>
-//     )
-// }
+import { Wallets } from "./pages/Wallets";  
+import { Transactions } from "./pages/Transactions";  
+
+const Routing = () => {
+
+    return (
+        <div>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Wallets />} />
+                    <Route path="/transactions" element={<Transactions />} />
+                </Routes>
+            </Router>
+        </div>
+    )
+}
+
+export default Routing

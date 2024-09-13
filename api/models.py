@@ -8,7 +8,6 @@ import uuid
 
 # Create your models here.
 class User(AbstractUser):
-    # uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(_("username"), max_length=150, blank=False, unique=True)
     email = models.EmailField(_("email address"), blank=False, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=False)
@@ -25,19 +24,14 @@ class User(AbstractUser):
     
     
 class Account(models.Model): 
-    uuid = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
-    owner = models.ForeignKey('User', related_name='account', on_delete=models.CASCADE, editable=False)
+    account_holder = models.ForeignKey('User', related_name='account_holder', on_delete=models.CASCADE)
     account_number = models.PositiveIntegerField(unique=True)
     balance = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
     def __str__(self) -> str:
-        return str(f"{self.account_number} - {self.owner}")
+        return str(f"{self.account_number}")
 
     
 TRANSACTION_TYPES = (
@@ -53,16 +47,15 @@ TRANSACTION_STATUSES = (
 )
     
 class Transaction(models.Model):
-    account = models.ForeignKey(Account, related_name='account', on_delete=models.CASCADE, null=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     transaction_type = models.CharField(max_length=100, choices=TRANSACTION_TYPES, null=True)
     status = models.CharField(max_length=100, choices=TRANSACTION_STATUSES)  
     date = models.DateField()
     
-    creator = models.ForeignKey(Account, related_name='creator', on_delete=models.CASCADE, null=True)
-    receiver = models.ForeignKey(Account, related_name='receiver', on_delete=models.CASCADE,  null=True)
+    account = models.ForeignKey('Account', related_name='account', on_delete=models.PROTECT) # sender
+    receiver = models.ForeignKey('Account', related_name='receiver', on_delete=models.PROTECT,  null=True)
     
-    # REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['account']
 
     
     def __str__(self) -> str:

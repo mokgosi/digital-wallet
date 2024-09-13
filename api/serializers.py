@@ -7,15 +7,38 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
         
-
 class AccountSerializer(serializers.ModelSerializer):
     
-    owner = UserSerializer()
+    account_holder = UserSerializer()
     account_number = serializers.CharField(max_length=100, read_only=True)
     
     class Meta:
         model = Account
-        fields = ['uuid', 'owner', 'account_number', 'balance', 'created', 'updated']
+        fields = ['id', 'account_holder', 'account_number', 'balance', 'created', 'updated']
+        depth = 1
+        
+    # def get_transactions(self, obj):
+    #     print(self.context['request'])
+    #     trasactions = Transaction.objects.filter(account=self.context[''], account1=obj)
+    #     return TransactionSerializer(trasactions , many=True).data
+    
+    
+class TransactionSerializer(serializers.ModelSerializer):
+    
+    # account = AccountSerializer()
+    account = serializers.StringRelatedField()
+    receiver = serializers.StringRelatedField()
+    print(account)
+    
+    class Meta:
+        model = Transaction
+        fields = ['id', 'amount', 'transaction_type', 'status', 'account', 'receiver', 'date']
+
+        depth = 1        
+    
+        
+    
+        
         
 class AccountTransactionsHuperlink(serializers.HyperlinkedIdentityField):
     view_name = 'account-transactions'
@@ -34,13 +57,7 @@ class AccountTransactionsHuperlink(serializers.HyperlinkedIdentityField):
         return self.get_queryset().get(**lookup_kwargs)
      
         
-class TransactionSerializer(serializers.ModelSerializer):
-    
-    account = AccountSerializer()
-    
-    class Meta:
-        model = Transaction
-        fields = '__all__'
+
         
         
         
