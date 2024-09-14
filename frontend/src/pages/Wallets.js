@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import CustomModal from '../components/Modal'
 import { Navbar } from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 export const Wallets = () => {
 
@@ -76,7 +77,9 @@ export const Wallets = () => {
                             {walletsData.map((item,key) => (
                             <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
                                 <span className={`mr-2`}>{item.account_holder.first_name} {item.account_holder.last_name}</span>
-                                <span className={`mr-2`}><a href=''>{item.account_number}</a></span>
+                                <span className={`mr-2`}>
+                                    <Link to={`/accounts/${item.account_number}`}>{item.account_number}</Link>
+                                </span>
                                 <span className={`mr-2`}>{item.balance}</span>
                                 <span>
                                 

@@ -4,6 +4,7 @@ import {
 
 import { Wallets } from "./pages/Wallets";  
 import { Transactions } from "./pages/Transactions";  
+import { Account } from "./pages/Account";  
 
 const Routing = () => {
 
@@ -13,6 +14,7 @@ const Routing = () => {
                 <Routes>
                     <Route path="/" element={<Wallets />} />
                     <Route path="/transactions" element={<Transactions />} />
+                    <Route path="/accounts/:account_number"  element={<Account />} />
                 </Routes>
             </Router>
         </div>
