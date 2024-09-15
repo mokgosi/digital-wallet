@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, Component } from "react";
+// import React, { useEffect, useState, useRef, Component } from "react";
 
-// importing all of these classes from reactstrap module
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label, Dropdown,  DropdownToggle,  DropdownMenu,  DropdownItem,} from "reactstrap";
-import axios from 'axios';  
+// // importing all of these classes from reactstrap module
+// import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label} from "reactstrap";
+// import axios from 'axios';  
 
 // class CustomModal extends Component {
 //   constructor(props) {
@@ -12,7 +12,6 @@ import axios from 'axios';
 //       activeItem: this.props.activeItem,
 //       accountList: []
 //     };
-    
 //   }
 
 //   handleChange = e => {
@@ -52,7 +51,7 @@ import axios from 'axios';
 
 //                 <FormGroup>
 //                 <Label for='balance'>Balance</Label>
-//                 <Input type="text" id='balance' name="balance" value={this.state.activeItem.balance} onChange={this.handleChange} placeholder="Enter Balance" />
+//                 <Input type="text" id='balance' name="balance" onChange={this.handleChange} placeholder="Enter Balance" />
 //                 </FormGroup>
 
 //             </Form>
@@ -69,85 +68,62 @@ import axios from 'axios';
 // export default CustomModal
 
 
-const CustomModal = () => {
 
-  const [userData, setUserData] = useState([])
-  const [selectedUser, setSelectedUser] = useState(null)
 
-  const [isVisible, setIsVisible] = useState(false);
-  const modalRef = useRef(null);
 
-  const toggleModal = () => {
-    setIsVisible(!isVisible);
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import AddEditForm from "../components/forms/AddEditWalletForm";
+
+function ModalForm(props) {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => {
+    setModal(!modal);
   };
 
-  const closeModal = () => {
-    setIsVisible(false);
-  };
+  const closeBtn = (
+    <button className="close" onClick={toggle}>
+      &times;
+    </button>
+  );
+  const label = props.buttonLabel;
 
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsVisible(false);
-      closeModal();
-    }
-  };
+  let button = "";
+  let title = "";
 
-  useEffect(() => {
-      const url = 'http://localhost:8000/api/'
-
-      axios.get(url)
-        .then(response => {
-            setUserData(response.data);
-            setSelectedUser(response.data[0])
-        })
-        .catch(err => {
-          console.error('Error:', err);
-        })
-
-        if (isVisible) {
-          document.addEventListener('mousedown', handleClickOutside);
-        }
-    
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-  }, [isVisible]);
-
-  const handleChange = (event) => {
-    const selectedUserId = event.target.value;
-    const selected = userData.find(user => user.id === parseInt(selectedUserId));
-    selectedUser(selected);
-  };
+  if (label === "Edit") {
+    button = (
+      <Button color="warning" onClick={toggle} style={{ float: "left", marginRight: "10px" }}>
+        {label}
+      </Button>
+    );
+    title = "Edit Wallet";
+  } else {
+    button = (
+      <Button color="success" onClick={toggle} style={{ float: "left", marginRight: "10px" }}>
+        {label}
+      </Button>
+    );
+    title = "Add New Wallet";
+  }
 
   return (
-
-      <Modal isOpen={true}>
-        <ModalHeader> New Wallet </ModalHeader>
+    <div>
+      {button}
+      <Modal isOpen={modal} toggle={toggle} className={props.className} backdrop={"static"} keyboard={false}>
+        <ModalHeader toggle={toggle} close={closeBtn}>
+          {title}
+        </ModalHeader>
         <ModalBody>
-        
-            <Form>
-                <FormGroup>
-                <Label for='title'>Owner</Label>
-                <select id='owner' name="owner" className='form-control' onChange={handleChange}>
-                  {userData.map(user => (
-                      <option value={user.id} key={user.id}>{user.first_name} {user.last}</option>
-                  ))}
-                </select>
-                </FormGroup>
-
-                <FormGroup>
-                <Label for='description'>Balance</Label>
-                <Input type="text" id='balance' name="balance" placeholder="Enter Balance" />
-                </FormGroup>
-            </Form>
+          <AddEditForm addItemToState={props.addItemToState} updateState={props.updateState} toggle={toggle} item={props.item} owners={props.owners}/>
         </ModalBody>
-        <ModalFooter>
-            <Button color="success">
-                Save
-            </Button>
-        </ModalFooter>
       </Modal>
-  )
+    </div>
+  );
 }
 
-export default CustomModal
+export default ModalForm;
+
+
+

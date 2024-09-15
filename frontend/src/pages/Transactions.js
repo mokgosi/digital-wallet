@@ -1,8 +1,9 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
 import { useState, useRef, useEffect } from 'react'
-import CustomModal from '../components/Modal'
 import axios from 'axios'
+import DataTable from "../components/tables/TransactionTable"
+import ModalForm from '../components/Modal'
 
 export const Transactions = () => {
 
@@ -27,38 +28,49 @@ export const Transactions = () => {
           .catch(err => console.log(err));
     };
 
+    const addItemToState = (item) => {
+        setTransactionsData([...transactionsData, item]);
+    };
+
+    const updateState = (item) => {
+        const itemIndex = transactionsData.findIndex((data) => data.id === item.id);
+        const newArray = [
+          ...transactionsData.slice(0, itemIndex),
+          item,
+          ...transactionsData.slice(itemIndex + 1)
+        ];
+        setTransactionsData(newArray);
+    };
+
+    const deleteItemFromState = (id) => {
+        const updatedItems = transactionsData.filter((item) => item.id !== id);
+        setTransactionsData(updatedItems);
+      };  
+
     return (
         <div  className="wallets">
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto p-0">
                     <div className="card p-3">
                         <div className="float-right my-2">
-                            <button onClick={() => setShowModal(!showModal)} className="float-right btn btn-success">
-                            Create New
-                            </button>
                             <Navbar />
                         </div>
-                        <ul className="list-group list-group-flush">
-                            {transactionsData.map((item,key) => (
-                            <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
-                                <span className={`mr-2`}>{item.account}</span>
-                                <span className={`mr-2`}>{item.transaction_type}</span>
-                                <span className={`mr-2`}>{item.amount}</span>
-                                <span className={`mr-2`}>{item.date}</span>
-                                <span>
-                                <button onClick={() => handleDelete(item)} className="btn btn-danger">
-                                    Delete
-                                </button>
-                                </span>
-                            </li>
-                            ))}
-                        </ul>
-                        
+
+                        <DataTable
+                            items={transactionsData}
+                            updateState={updateState}
+                            deleteItemFromState={deleteItemFromState}
+                        />
+
                     </div>
                 </div>
-                {showModal ? (
-                    <CustomModal isVisible={showModal} toggleModal={() => setShowModal(false)}/>
-                ) : null}
+            </div>
+            <div className="row">
+                <div className="col-md-6 col-sm-10 mx-auto p-0">
+                    <div className="card p-3">
+                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}/>
+                    </div>
+                </div>
             </div>
         </div>
     )    

@@ -34,6 +34,7 @@ export const Account = () => {
                         </div>
                         <ul className="list-group list-group-flush">
                             {/* Uncaught TypeError: Cannot read property 'transactions' of undefined */}
+                            {/* data is an empty object initially - use optional chaining operator ?. */}
                             {accountData?.transactions?.map((item, key) => (
                             <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
                                 <span className={`mr-2`}>{item.account}</span>
