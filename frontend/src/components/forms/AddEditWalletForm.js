@@ -5,7 +5,7 @@ function AddEditForm(props) {
   const [form, setValues] = useState({
     id: 0,
     balance: "",
-    owner: ""
+    account_holder: ""
   });
 
   const onChange = (e) => {
@@ -52,12 +52,12 @@ function AddEditForm(props) {
       </FormGroup>
       
       <FormGroup>
-        <Label for="owner">Account Holder</Label>
-        {/* <select id='owner' name="owner" className='form-control' onChange={this.handleChange}>
+        <Label for="account_holder">Account Holder</Label>
+        <select id='account_holder' name="account_holder" className='form-control' onChange={onChange}>
           {props.owners.map(user => (
                 <option value={user.id} key={user.id} >{user.first_name} {user.last}</option>
           ))}
-        </select> */}
+        </select>
         
       </FormGroup>
       <Button>Submit</Button>

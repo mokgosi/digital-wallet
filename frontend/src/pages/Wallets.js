@@ -19,6 +19,7 @@ export const Wallets = () => {
 
     useEffect(() => {
         fetchData()
+        getOwners()
     }, [])
 
     const fetchData = async () => {
@@ -87,23 +88,6 @@ export const Wallets = () => {
                         <div className="float-right my-2">
                             <Navbar />
                         </div>
-                        {/* <ul className="list-group list-group-flush">
-                            {walletsData.map((item,key) => (
-                            <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
-                                <span className={`mr-2`}>{item.account_holder.first_name} {item.account_holder.last_name}</span>
-                                <span className={`mr-2`}>
-                                    <Link to={`/accounts/${item.account_number}`}>{item.account_number}</Link>
-                                </span>
-                                <span className={`mr-2`}>{item.balance}</span>
-                                <span>
-                                
-                                <button onClick={() => handleDelete(item)} className="btn btn-danger">
-                                    Delete
-                                </button>
-                                </span>
-                            </li>
-                            ))}
-                        </ul> */}
 
                         <DataTable
                             items={walletsData}
@@ -117,7 +101,7 @@ export const Wallets = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto p-0">
                     <div className="card p-3">
-                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}/>
+                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState} owners={owners}/>
                     </div>
                 </div>
             </div>
