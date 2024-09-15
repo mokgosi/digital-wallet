@@ -49,6 +49,8 @@ Launch the front-end app http://127.0.0.1:3000/
 
 Launch api browsable here:  http://127.0.0.1:8000/
 
+Launch admin here:  http://127.0.0.1:8000/
+
 API Endpoints:
 
 http://127.0.0.1:8000/api/

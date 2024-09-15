@@ -26,6 +26,11 @@ class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'username'
 
 
+class AccountListReadOnly(generics.ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    
+    
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer

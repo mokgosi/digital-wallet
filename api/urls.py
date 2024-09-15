@@ -2,16 +2,15 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('api/', views.UserList.as_view(), name='user-list'),
+    
+    path('api/', views.AccountListReadOnly.as_view(), name='account-list-read-only'),
+    path('api/accounts', views.AccountList.as_view(), name='account-list'),
+    
+    path('api/users', views.UserList.as_view(), name='user-list'),
     # path('api/<str:username>', views.UserRetrieveUpdateDestroy.as_view(), name='user-retrieve-update-destroy'),
     
-    path('api/accounts', views.AccountList.as_view(), name='account-list'),
+    
     path('api/accounts/<int:account_number>', views.AccountRetrieveDestroy.as_view(), name='account-retrieve-destroy'),
-    
-    
-    
-    
-    
     
     path('api/accounts/<int:account_number>/transactions', views.TransactionRetrieveUpdateDestroy.as_view(), name='account-transactions-retrieve-destroy'),
     
