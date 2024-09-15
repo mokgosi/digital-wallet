@@ -50,7 +50,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     transaction_type = models.CharField(max_length=100, choices=TRANSACTION_TYPES)
     status = models.CharField(max_length=100, choices=TRANSACTION_STATUSES)  
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     account = models.ForeignKey('Account', related_name='account', on_delete=models.PROTECT) # sender
     receiver = models.ForeignKey('Account', related_name='receiver', on_delete=models.PROTECT,  null=True)

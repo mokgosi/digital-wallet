@@ -9,9 +9,11 @@ export const Transactions = () => {
 
     const [transactionsData, setTransactionsData] = useState([])
     const [showModal, setShowModal] = useState(false);
+    const [owners, setOwners] = useState([])
 
     useEffect(() => {
         fetchData()
+        getOwners()
     }, [])
 
     const fetchData = async () => {
@@ -21,6 +23,16 @@ export const Transactions = () => {
             .catch(err => console.log(err));
     }
 
+    const toggle = () => setShowModal(!showModal)
+
+    const getOwners = async () => {
+        return await axios
+            .get("http://localhost:8000/api/accounts")
+            .then(res => setOwners(res.data))
+            .catch(err => console.log(err));
+
+    };
+
     const handleDelete = (item) => {
         axios
           .delete(`http://localhost:8000/api/transactions/${item.id}`)
@@ -29,7 +41,10 @@ export const Transactions = () => {
     };
 
     const addItemToState = (item) => {
-        setTransactionsData([...transactionsData, item]);
+        axios
+          .post("http://localhost:8000/api/transactions", item)
+          .then((response) => setTransactionsData([...transactionsData, item]))
+          .catch(err => console.log(err));
     };
 
     const updateState = (item) => {
@@ -68,7 +83,7 @@ export const Transactions = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto p-0">
                     <div className="card p-3">
-                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}/>
+                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}  owners={owners}/>
                     </div>
                 </div>
             </div>

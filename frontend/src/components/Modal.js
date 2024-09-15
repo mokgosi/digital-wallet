@@ -74,6 +74,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import AddEditForm from "../components/forms/AddEditWalletForm";
+import AddEditTransactionForm from "../components/forms/AddEditTransactionForm";
 
 function ModalForm(props) {
   const [modal, setModal] = useState(false);
@@ -116,7 +117,8 @@ function ModalForm(props) {
           {title}
         </ModalHeader>
         <ModalBody>
-          <AddEditForm addItemToState={props.addItemToState} updateState={props.updateState} toggle={toggle} item={props.item} owners={props.owners}/>
+          {/* <AddEditForm addItemToState={props.addItemToState} updateState={props.updateState} toggle={toggle} item={props.item} owners={props.owners}/> */}
+          <AddEditTransactionForm addItemToState={props.addItemToState} updateState={props.updateState} toggle={toggle} item={props.item} owners={props.owners}/>
         </ModalBody>
       </Modal>
     </div>

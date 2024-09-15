@@ -2,26 +2,35 @@ import React from 'react'
 import { Table, Button } from 'reactstrap';
 import ModalForm from '../Modal';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 function DataTable(props){
 
-  const deleteItem = id => {
-    let confirmDelete = window.confirm('Delete item forever?')
-    if(confirmDelete){
-      fetch('http://localhost:3000/crud', {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id
-      })
-    })
-      .then(response => response.json())
-      .then(item => {
-        props.deleteItemFromState(id)
-      })
-      .catch(err => console.log(err))
+  const deleteItem = account_number => {
+    let confirmDelete = window.confirm('Are sure you want to delete account?')
+    
+    if(confirmDelete) {
+           axios
+            .delete(`http://localhost:8000/api/accounts/${account_number}`)
+            .then(item => {
+              props.deleteItemFromState(account_number)
+            })
+            .catch(err => console.log(err));
+
+          //   fetch('http://localhost:3000/crud', {
+          //   method: 'delete',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify({
+          //     id
+          //   })
+          // })
+          //   .then(response => response.json())
+          //   .then(item => {
+          //     props.deleteItemFromState(id)
+          //   })
+          //   .catch(err => console.log(err))
     }
   }
 
@@ -35,7 +44,7 @@ function DataTable(props){
           <div style={{width:"110px"}}>
             <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
             {' '}
-            <Button color="danger" onClick={() => deleteItem(item.id)}>Delete</Button>
+            <Button color="danger" onClick={() => deleteItem(item.account_number)}>Delete</Button>
           </div>
         </td>
       </tr>
@@ -46,7 +55,7 @@ function DataTable(props){
     <Table responsive hover>
       <thead>
         <tr>
-          <th>Ownner</th>
+          <th>Owner</th>
           <th>Account</th>
           <th>Balance</th>
           <th>Actions</th>

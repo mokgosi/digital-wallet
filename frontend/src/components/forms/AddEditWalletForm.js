@@ -15,7 +15,6 @@ function AddEditForm(props) {
     });
   };
 
-  console.log(props);
 
   const submitFormAdd = (e) => {
     console.log(props.item);
@@ -32,8 +31,8 @@ function AddEditForm(props) {
 
   useEffect(() => {
     if (props.item) {
-      const { id, first, last, email, phone, location, hobby } = props.item;
-      setValues({ id, first, last, email, phone, location, hobby });
+      const { id, balance, account_holder } = props.item;
+      setValues({ id, balance, account_holder });
     }
   }, [props.item]);
 

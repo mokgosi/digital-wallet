@@ -10,7 +10,11 @@ import DataTable from "../components/tables/WalletTable"
 
 export const Wallets = () => {
 
-    const [walletsData, setWalletsData] = useState([])
+    const [walletsData, setWalletsData] = useState([{
+        id: 0,
+        balance: "",
+        account_holder: ""}
+    ])
     const [showModal, setShowModal] = useState(false);
     const [owners, setOwners] = useState([])
 
@@ -31,21 +35,21 @@ export const Wallets = () => {
     
     const toggle = () => setShowModal(!showModal)
     
-    const  handleSubmit = (item) => {
-        toggle();
+    // const  handleSubmit = (item) => {
+    //     toggle();
     
-        axios
-          .post("http://localhost:8000/api/accounts", item)
-          .then((response) =>  setWalletsData(response.data))
-          .catch(err => console.log(err));
-    };
+    //     axios
+    //       .post("http://localhost:8000/api/accounts", item)
+    //       .then((response) =>  setWalletsData(response.data))
+    //       .catch(err => console.log(err));
+    // };
     
-    const handleDelete = (item) => {
-        axios
-            .delete(`http://localhost:8000/api/accounts/${item.account_number}`)
-            .then(() => fetchData())
-            .catch(err => console.log(err));
-    };
+    // const handleDelete = (item) => {
+    //     axios
+    //         .delete(`http://localhost:8000/api/accounts/${item.account_number}`)
+    //         .then(() => fetchData())
+    //         .catch(err => console.log(err));
+    // };
 
     //update this on the api side
     const getOwners = async () => {
@@ -57,14 +61,14 @@ export const Wallets = () => {
     };
 
     const addItemToState = (item) => {
-        setWalletsData([...walletsData, item]);
+
+        axios
+          .post("http://localhost:8000/api/accounts", item)
+          .then((response) =>  setWalletsData([...walletsData, item]))
+          .catch(err => console.log(err));
+
     };
      
-    const createItem = () => {
-        const item = { owner: "", balance: ""};
-        // this.setState({ activeItem: item, modal: !this.state.modal });
-    };
-
     const updateState = (item) => {
         const itemIndex = walletsData.findIndex((data) => data.id === item.id);
         const newArray = [
@@ -76,7 +80,7 @@ export const Wallets = () => {
     };
 
     const deleteItemFromState = (id) => {
-        const updatedItems = walletsData.filter((item) => item.id !== id);
+        const updatedItems = walletsData.filter((item) => item.account_number !== id);
         setWalletsData(updatedItems);
     };  
     
