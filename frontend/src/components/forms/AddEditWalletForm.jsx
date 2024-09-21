@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-function AddEditForm(props) {
+function AddEditWalletForm(props) {
   const [form, setValues] = useState({
     id: 0,
     balance: "",
@@ -64,4 +64,4 @@ function AddEditForm(props) {
   );
 }
 
-export default AddEditForm;
+export default AddEditWalletForm;

@@ -5,6 +5,8 @@ import {
 import { Wallets } from "./pages/Wallets";  
 import { Transactions } from "./pages/Transactions";  
 import { Account } from "./pages/Account";  
+import { Login } from "./pages/Login";  
+import { Register } from "./pages/Register";  
 
 const Routing = () => {
 
@@ -15,6 +17,10 @@ const Routing = () => {
                     <Route path="/" element={<Wallets />} />
                     <Route path="/transactions" element={<Transactions />} />
                     <Route path="/accounts/:account_number"  element={<Account />} />
+
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+
                 </Routes>
             </Router>
         </div>

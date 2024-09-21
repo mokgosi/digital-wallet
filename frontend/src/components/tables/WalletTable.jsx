@@ -40,13 +40,13 @@ function DataTable(props){
         <td>{item.account_holder.first_name} {item.account_holder.last_name}</td>
         <td><Link to={`/accounts/${item.account_number}`}>{item.account_number}</Link></td>
         <td>{item.balance}</td>
-        <td>
+        {/* <td>
           <div style={{width:"110px"}}>
             <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
             {' '}
             <Button color="danger" onClick={() => deleteItem(item.account_number)}>Delete</Button>
           </div>
-        </td>
+        </td> */}
       </tr>
       )
     })
@@ -58,7 +58,7 @@ function DataTable(props){
           <th>Owner</th>
           <th>Account</th>
           <th>Balance</th>
-          <th>Actions</th>
+          {/* <th>Actions</th> */}
         </tr>
       </thead>
       <tbody>

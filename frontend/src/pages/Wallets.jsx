@@ -2,10 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import CustomModal from '../components/Modal'
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/Navbar.jsx'
 import { Link } from 'react-router-dom'
 
-import ModalForm from '../components/Modal'
+import ModalForm from '../components/Modal.jsx'
 import DataTable from "../components/tables/WalletTable"
 
 export const Wallets = () => {

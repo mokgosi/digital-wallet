@@ -73,8 +73,8 @@
 
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import AddEditForm from "../components/forms/AddEditWalletForm";
-import AddEditTransactionForm from "../components/forms/AddEditTransactionForm";
+import AddEditForm from "./forms/AddEditWalletForm.jsx";
+import AddEditTransactionForm from "./forms/AddEditTransactionForm.jsx";
 
 function ModalForm(props) {
   const [modal, setModal] = useState(false);

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/Navbar.jsx'
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import DataTable from "../components/tables/TransactionTable"
-import ModalForm from '../components/Modal'
+import ModalForm from '../components/Modal.jsx'
 
 export const Transactions = () => {
 

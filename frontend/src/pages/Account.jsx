@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/Navbar.jsx'
 
 export const Account = () => {
     const [accountData, setAccountData] = useState([]);

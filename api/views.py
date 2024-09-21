@@ -3,7 +3,13 @@ from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.decorators import api_view
+
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
 
 from .models import *
 from .serializers import *
@@ -12,6 +18,7 @@ from .forms import UserRegistrationForm
 from django.db.models import F
 
 import random
+import json
 
 # Create your views here.
 class UserList(generics.ListCreateAPIView):
@@ -123,10 +130,15 @@ class TransactionList(generics.ListCreateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+    
+            
 class RegisterUserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
-    # permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny,)
     
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -147,11 +159,18 @@ class LoginUserView(APIView):
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key})
         else:
-            return Response({'error': 'Invalid credentials'}, status=401)
+            return Response({'error': 'Login Fail: Invalid credentials'}, status=401)
     
     
-    
-    
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token/',
+        '/api/register/',
+        '/api/token/refresh/',
+        '/api/test/'
+    ]
+    return Response(routes)    
     
     
     
