@@ -56,7 +56,6 @@ class Transaction(models.Model):
     receiver = models.ForeignKey('Account', related_name='receiver', on_delete=models.PROTECT,  null=True)
     
     REQUIRED_FIELDS = ['account']
-
     
     def __str__(self) -> str:
         return str(self.id)
