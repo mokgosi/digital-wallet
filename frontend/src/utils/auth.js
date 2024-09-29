@@ -1,9 +1,9 @@
 import { useAuthStore } from '../store/auth';
 import axios from './axios';
-// import { jwtDecode } from "jwt-decode";
+import jwtDecode from "../../node_modules/jwt-decode";
 
 import Cookies from 'js-cookie';
-// const { jwtDecode } = require('jwt-decode');
+// const { jwtDecode } = require('jwt-decode.js');
 
 export const login = async (email, password) => {
     try {
@@ -19,7 +19,7 @@ export const login = async (email, password) => {
     } catch (error) {
         return {
             data: null,
-            error: error.response.data?.detail || 'Something went wrong',
+            error: error.response?.data?.detail || 'Something went wrong - login',
         };
     }
 };
@@ -39,7 +39,7 @@ export const register = async (username, password, confirm_password, email, last
     } catch (error) {
         return {
             data: null,
-            error: error.response.data || 'Something went wrong',
+            error: error?.response?.data || 'Something went wrong - register',
         };
     }
 };
@@ -66,6 +66,9 @@ export const setUser = async () => {
 };
 
 export const setAuthUser = (access_token, refresh_token) => {
+    
+    console.log('setAuthUser', 'access_token: '+access_token, 'refresh_token: '+refresh_token);
+
     Cookies.set('access_token', access_token, {
         expires: 1,
         secure: true,
