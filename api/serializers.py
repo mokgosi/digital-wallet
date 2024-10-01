@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
         
+        
 class AccountSerializer(serializers.ModelSerializer):
     
     # account_holder = UserSerializer()
@@ -19,6 +20,7 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['id', 'account_holder', 'account_number', 'balance', 'created', 'updated']
         depth = 1
+  
   
 class AccountReadOnlySerializer(serializers.ModelSerializer):
 
@@ -45,24 +47,6 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = ['id', 'amount', 'transaction_type', 'status', 'account', 'receiver', 'date']
         # depth = 1        
         
-        
-class AccountTransactionsHuperlink(serializers.HyperlinkedIdentityField):
-    view_name = 'account-transactions'
-    queryset = Account.objects.all()
-    
-    def get_url(self, obj, view_name, request, format):
-        url_kwargs = {
-            'acount_number': obj.account.account_number,    
-        }
-        return reverse(view_name, kwargs=url_kwargs, request=request, format=format)
-
-    def get_object(self, view_name, view_args, view_kwargs):
-        lookup_kwargs = {
-           'account_number': view_kwargs['accoutn_number'],
-        }
-        return self.get_queryset().get(**lookup_kwargs)
-     
-
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
@@ -75,6 +59,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
         return token        
         
+
 class RegisterUserSerializer(serializers.ModelSerializer):
     
     confirm_password = serializers.CharField(max_length=100, write_only=True)

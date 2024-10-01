@@ -60,12 +60,5 @@ class Transaction(models.Model):
     def __str__(self) -> str:
         return str(self.id)
     
-    
     class Meta:
         verbose_name_plural = "Transactions"
-            
-    
-    
-
-
-

@@ -53,6 +53,7 @@ class AccountList(generics.ListCreateAPIView):
         serializer = AccountSerializer(account)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     
+
 class AccountRetrieveDestroy(generics.RetrieveDestroyAPIView): 
     queryset = Account.objects.all()
     serializer_class = AccountReadOnlySerializer
@@ -67,7 +68,7 @@ class TransactionRetrieveUpdateDestroy(generics.ListCreateAPIView):
     
 class TransactionList(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer 
+    serializer_class = TransactionSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]   
     
     def post(self,request, *args, **kwargs):
@@ -163,12 +164,16 @@ class LoginUserView(APIView):
     
     
 @api_view(['GET'])
-def getRoutes(request):
+def routes(request):
     routes = [
-        '/api/token/',
-        '/api/register/',
-        '/api/token/refresh/',
-        '/api/test/'
+        '/api/token',
+        '/api/token/refresh',
+        '/api/register',
+        '/api/login',
+        '/api/accounts',
+        '/api/accounts/<int:account_number>',
+        '/api/accounts/<int:account_number>/transactions',
+        '/api/transactions',
     ]
     return Response(routes)    
     
@@ -182,6 +187,3 @@ def getRoutes(request):
 #             new_user = form.save()
 #             return redirect('accounts:register')
 #     return render(request, "accounts/register.html", context = {"form":form})
-
-
-

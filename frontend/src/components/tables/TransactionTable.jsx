@@ -2,21 +2,22 @@ import React from 'react'
 import { Table, Button } from 'reactstrap';
 import ModalForm from '../Modal';
 import { Link } from 'react-router-dom'
+import moment from 'moment';
 
-function DataTable(props){
+function DataTable(props) {
 
   const deleteItem = id => {
     let confirmDelete = window.confirm('Delete item forever?')
-    if(confirmDelete){
-      fetch('http://localhost:3000/crud', {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id
+    if(confirmDelete) {
+        fetch('http://localhost:3000/crud', {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id
+        })
       })
-    })
       .then(response => response.json())
       .then(item => {
         props.deleteItemFromState(id)
@@ -31,10 +32,10 @@ function DataTable(props){
         <td>{item.account}</td>
         <td>{item.transaction_type}</td>
         <td>{item.amount}</td>
-        <td>{item.date}</td>
+        <td>{moment(item.date).format('Do-MM-YYYY, h:mm:ss a')}</td>
       </tr>
-      )
-    })
+    )
+  })
 
   return (
     <Table responsive hover>
