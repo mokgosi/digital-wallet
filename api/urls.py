@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import ( TokenRefreshView, )
 
 urlpatterns = [
     
-    path('', views.routes, name='routes'),
+    path('', views.endPoints, name='routes'),
     path('accounts', views.AccountList.as_view(), name='account-list'),
     path('accounts-readonly', views.AccountListReadOnly.as_view(), name='account-list-read-only'),
     path('accounts/<int:account_number>', views.AccountRetrieveDestroy.as_view(), name='account-retrieve-destroy'),

@@ -18,10 +18,6 @@ function AddEditTransactionForm(props) {
       ...form,
       [e.target.name]: e.target.value
     });
-    console.log(form)
-
-    console.log(e.target.name)
-    console.log(e.target.value)
 
     if(e.target.name === 'transaction_type') {
         if(e.target.value === "Transfer") {
@@ -33,7 +29,6 @@ function AddEditTransactionForm(props) {
   };
 
   const submitFormAdd = (e) => {
-    console.log(props.item);
     e.preventDefault();
     props.addItemToState(form);
     props.toggle();

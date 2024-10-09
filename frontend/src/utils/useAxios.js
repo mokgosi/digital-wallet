@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 const useAxios = () => {
     const accessToken = Cookies.get('access_token');
     const refreshToken = Cookies.get('refresh_token');
-
+    
     const axiosInstance = axios.create({
         baseURL: API_BASE_URL,
         headers: { Authorization: `Bearer ${accessToken}` },

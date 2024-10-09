@@ -51,9 +51,15 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=100, choices=TRANSACTION_TYPES)
     status = models.CharField(max_length=100, choices=TRANSACTION_STATUSES)  
     date = models.DateTimeField(auto_now_add=True)
+    description = models.CharField(max_length=100, blank=True)
     
-    account = models.ForeignKey('Account', related_name='account', on_delete=models.PROTECT) # sender
+    # sender/account performing transaction
+    account = models.ForeignKey('Account', related_name='account', on_delete=models.PROTECT) 
+    # receiver/account receiving transfer
     receiver = models.ForeignKey('Account', related_name='receiver', on_delete=models.PROTECT,  null=True)
+    
+    account_new_balance = models.DecimalField(blank=True, max_digits=10, decimal_places=2) # balance after transaction 
+    receiver_new_balance = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2) # balance after transaction 
     
     REQUIRED_FIELDS = ['account']
     

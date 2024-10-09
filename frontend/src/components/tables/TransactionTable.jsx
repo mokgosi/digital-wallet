@@ -32,7 +32,8 @@ function DataTable(props) {
         <td>{item.account}</td>
         <td>{item.transaction_type}</td>
         <td>{item.amount}</td>
-        <td>{moment(item.date).format('Do-MM-YYYY, h:mm:ss a')}</td>
+        <td>{moment(item.date).format('Do-MM-YYYY')}</td>
+        <td>{moment(item.date).format('h:mm:ss a')}</td>
       </tr>
     )
   })
@@ -45,6 +46,7 @@ function DataTable(props) {
           <th>Transaction Type</th>
           <th>Amount</th>
           <th>Date</th>
+          <th>Time</th>
         </tr>
       </thead>
       <tbody>

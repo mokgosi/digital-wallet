@@ -1,0 +1,24 @@
+[
+  {
+    "model": "api.account",
+    "pk": 1,
+    "fields": {
+      "account_holder": 2,
+      "account_number": 74791615,
+      "balance": "8900.00",
+      "created": "2024-09-20T08:20:36.014Z",
+      "updated": "2024-10-01T13:18:42.558Z"
+    }
+  },
+  {
+    "model": "api.account",
+    "pk": 2,
+    "fields": {
+      "account_holder": 3,
+      "account_number": 33542388,
+      "balance": "10300.00",
+      "created": "2024-09-20T08:20:41.813Z",
+      "updated": "2024-10-01T13:16:13.595Z"
+    }
+  }
+]

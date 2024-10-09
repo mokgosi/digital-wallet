@@ -1,0 +1,230 @@
+[
+  {
+    "model": "api.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$kmjqJU5FlDu7aH2CJR768w$wdevOcwhy/Jr7xRMhFATBjHQ9D1WOGLv1oav1XyIfOE=",
+      "last_login": "2024-09-30T11:12:05.142Z",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-09-20T08:15:05.191Z",
+      "username": "admin",
+      "email": "admin@mail.com",
+      "first_name": "",
+      "last_name": "",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 2,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T08:17:55.986Z",
+      "username": "user1",
+      "email": "user1@mail1.com",
+      "first_name": "user1",
+      "last_name": "user1",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 3,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T08:18:30.558Z",
+      "username": "user2",
+      "email": "user1@mail2.com",
+      "first_name": "user2",
+      "last_name": "user2",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$oFX5dufgUhRxXNodH9UiRM$LDRMikImsR+NDxOcwus+fmAncjdflqOnASFswZCTBmg=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T09:34:18.356Z",
+      "username": "bofikum",
+      "email": "tuluve@mailinator.com",
+      "first_name": "Jaime",
+      "last_name": "Long",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$Sg8hLxUMY96gnHu0t3GVI6$CR05CTDngx1zhTCNbe+baYc1kxNyzBF9HHUwHW9coHc=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T09:35:38.727Z",
+      "username": "dituweja",
+      "email": "xabohehis@mailinator.com",
+      "first_name": "Malik",
+      "last_name": "Fischer",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$2LvDlp9emvJFuDv8ji6mHo$nw5u0pL0FjRpXx49XHFahlZJQoz5TMlkLbqUZUrRH4A=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T09:52:06.177Z",
+      "username": "hozewucybe",
+      "email": "rilahu@mailinator.com",
+      "first_name": "Zia",
+      "last_name": "Baldwin",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$B1tojDbJYJeO8TBVCgk2Cb$112OicRz1PJst7rez+Uz/Vbry/npSPE3pxElVFqJUYI=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T09:56:21.679Z",
+      "username": "nozusycy",
+      "email": "felug@mailinator.com",
+      "first_name": "Rose",
+      "last_name": "Mccullough",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$mKEPU9bdFi68nzptKXow3O$pVw36F5rKbhsBWKpHRjNsb8NPZfkMSm7fJrNOCt2NMs=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T09:57:03.540Z",
+      "username": "pujahunok",
+      "email": "texex@mailinator.com",
+      "first_name": "Iola",
+      "last_name": "Petersen",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$fNyQOK4Ca3mCgmNqSsaijU$Km2c3rWk0Bd2cFdxr3ohjo8SSO/2tCwFN3D9O6zvxtQ=",
+      "last_login": "2024-09-20T10:32:39.072Z",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-20T10:19:08.653Z",
+      "username": "ivana",
+      "email": "pytakeba@mailinator.com",
+      "first_name": "Ivana",
+      "last_name": "Riddle",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$GPNHmzDoxQzQTVmSuCi4Hb$usb5hNP28L0A7lGeeACxm02e8g7I7Hj3H5/4dca4zu0=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-29T13:14:20.589Z",
+      "username": "xidineve",
+      "email": "gipexanar@mailinator.com",
+      "first_name": "Sasha",
+      "last_name": "Duke",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 11,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-30T10:43:08.067Z",
+      "username": "user3",
+      "email": "user1@mail3.com",
+      "first_name": "user3",
+      "last_name": "user3",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$yUcj0Pllmzb8HNJuuPhmcY$hMsNRu2WthYCtPv9R//qzxwfbSVbAAI+kGInafF7oEE=",
+      "last_login": null,
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-01T08:32:22.549Z",
+      "username": "tree",
+      "email": "tree@mail.com",
+      "first_name": "",
+      "last_name": "",
+      "verified": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

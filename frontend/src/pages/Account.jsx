@@ -1,26 +1,37 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import DataTable from "../components/tables/AccountTable"
 
 import { Navbar } from '../components/Navbar.jsx'
+import useAxios from '../utils/useAxios';
 
 export const Account = () => {
     const [accountData, setAccountData] = useState([]);
     const { account_number } = useParams();
+    const api = useAxios();
     
     useEffect(() => {
         fetchData() 
-        console.log(accountData)
     }, [])
 
     const fetchData = async () => {
-        await axios
-            .get(`http://localhost:8000/api/accounts/${account_number}`)
-            .then(response => { setAccountData(response.data) })
-            .catch(err => console.log(err)); 
-
+        try {
+            api.get(`/accounts/${account_number}`).then(response => { setAccountData(response.data) })
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    const updateState = (item) => {
+        const itemIndex = accountData.findIndex((data) => data.id === item.id);
+        const newArray = [
+          ...accountData.slice(0, itemIndex),
+          item,
+          ...accountData.slice(itemIndex + 1)
+        ];
+        setAccountData(newArray);
+    };
 
     return (
         <div  className="account">
@@ -29,21 +40,11 @@ export const Account = () => {
                     <div className="card p-3">
                         <div className="float-right my-2">
                             <Navbar />
-                            <span>{`Account Number: ${account_number}`}</span>
-                            <span>{`  --   Balance: ${accountData.balance}`}</span>
                         </div>
-                        <ul className="list-group list-group-flush">
-                            {/* Uncaught TypeError: Cannot read property 'transactions' of undefined */}
-                            {/* data is an empty object initially - use optional chaining operator ?. */}
-                            {accountData?.transactions?.map((item, key) => (
-                            <li key={key} className="list-group-item d-flex justify-content-between align-items-center">
-                                <span className={`mr-2`}>{item.account}</span>
-                                <span className={`mr-2`}>{item.transaction_type}</span>
-                                <span className={`mr-2`}>{item.amount}</span>
-                                <span className={`mr-2`}>{item.date}</span>
-                            </li>
-                            ))}
-                        </ul>
+                         <DataTable
+                            items={accountData}
+                            updateState={updateState}
+                        /> 
                     </div>
                 </div>
             </div>

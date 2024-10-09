@@ -4,12 +4,15 @@ import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import DataTable from "../components/tables/TransactionTable"
 import ModalForm from '../components/Modal.jsx'
+import useAxios from '../utils/useAxios';
+
 
 export const Transactions = () => {
 
     const [transactionsData, setTransactionsData] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [owners, setOwners] = useState([])
+    const api = useAxios();
 
     useEffect(() => {
         fetchData()
@@ -17,8 +20,7 @@ export const Transactions = () => {
     }, [])
 
     const fetchData = async () => {
-        await axios
-            .get("http://localhost:8000/api/transactions")
+        api.get("/transactions")
             .then(response => { setTransactionsData(response.data) })
             .catch(err => console.log(err));
     }
@@ -26,23 +28,20 @@ export const Transactions = () => {
     const toggle = () => setShowModal(!showModal)
 
     const getOwners = async () => {
-        return await axios
-            .get("http://localhost:8000/api/accounts")
+        return api.get("/accounts")
             .then(res => setOwners(res.data))
             .catch(err => console.log(err));
 
     };
 
     const handleDelete = (item) => {
-        axios
-          .delete(`http://localhost:8000/api/transactions/${item.id}`)
+        api.delete(`/transactions/${item.id}`)
           .then((res) => fetchData())
           .catch(err => console.log(err));
     };
 
     const addItemToState = (item) => {
-        axios
-          .post("http://localhost:8000/api/transactions", item)
+        api.post("/transactions", item)
           .then((response) => setTransactionsData([...transactionsData, item]))
           .catch(err => console.log(err));
     };
@@ -63,19 +62,19 @@ export const Transactions = () => {
       };  
 
     return (
-        <div  className="wallets">
+        <div  className="transactions">
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto p-0">
                     <div className="card p-3">
                         <div className="float-right my-2">
                             <Navbar />
+                            <ModalForm buttonLabel="Transact" addItemToState={addItemToState}  owners={owners}/>
                         </div>
 
                         <DataTable
                             items={transactionsData}
                             updateState={updateState}
-                            deleteItemFromState={deleteItemFromState}
-                        />
+                            deleteItemFromState={deleteItemFromState} />
 
                     </div>
                 </div>
@@ -83,7 +82,7 @@ export const Transactions = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto p-0">
                     <div className="card p-3">
-                        <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}  owners={owners}/>
+                        
                     </div>
                 </div>
             </div>

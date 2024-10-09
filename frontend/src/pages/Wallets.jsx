@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 import ModalForm from '../components/Modal.jsx'
 import DataTable from "../components/tables/WalletTable"
+import useAxios from '../utils/useAxios';
 
 export const Wallets = () => {
 
@@ -17,8 +18,9 @@ export const Wallets = () => {
     ])
     const [showModal, setShowModal] = useState(false);
     const [owners, setOwners] = useState([])
-
     const [activeItem, setActiveItem] = useState(null)
+
+    const api = useAxios();
 
 
     useEffect(() => {
@@ -27,10 +29,11 @@ export const Wallets = () => {
     }, [])
 
     const fetchData = async () => {
-        await axios
-            .get("http://localhost:8000/api/accounts")
-            .then(response => { setWalletsData(response.data) })
-            .catch(err => console.log(err));
+        try {
+            api.get(`/accounts`).then(response =>  setWalletsData(response.data))
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     const toggle = () => setShowModal(!showModal)
@@ -53,8 +56,7 @@ export const Wallets = () => {
 
     //update this on the api side
     const getOwners = async () => {
-        return await axios
-            .get("http://localhost:8000/api/")
+        return api.get("http://localhost:8000/api/")
             .then(res => setOwners(res.data))
             .catch(err => console.log(err));
 
@@ -62,8 +64,7 @@ export const Wallets = () => {
 
     const addItemToState = (item) => {
 
-        axios
-          .post("http://localhost:8000/api/accounts", item)
+        api.post("http://localhost:8000/api/accounts", item)
           .then((response) =>  setWalletsData([...walletsData, item]))
           .catch(err => console.log(err));
 
