@@ -118,9 +118,10 @@ class TransactionList(generics.ListCreateAPIView):
             if account: 
                 if request.data['transaction_type'] == 'Deposit':
                     
-                    account.balance = account.balance + transaction_amount
+                    account.balance += transaction_amount
                     account.save()
-                    transaction.account_new_balance = account.balance
+                    
+                    serializer.validated_data['account_new_balance'] = account.balance
                     transaction = serializer.save()
                     return  Response(
                         {'transaction': TransactionSerializer(transaction, context=self.get_serializer_context()).data}, 
@@ -129,9 +130,10 @@ class TransactionList(generics.ListCreateAPIView):
                 elif request.data['transaction_type'] == 'Withdrawal': 
                       
                     if account.balance > transaction_amount:
-                        account.balance = account.balance - transaction_amount
+                        account.balance -= transaction_amount
                         account.save()
-                        transaction.account_new_balance = account.balance #current account balance 
+                        
+                        serializer.validated_data['account_new_balance'] = account.balance
                         transaction = serializer.save()
                         return  Response(
                             {'transaction': TransactionSerializer(transaction, context=self.get_serializer_context()).data}, 
@@ -142,18 +144,18 @@ class TransactionList(generics.ListCreateAPIView):
                 elif request.data['transaction_type'] == 'Transfer':
                     
                     if account.balance > transaction_amount: 
-                        account.balance = account.balance - transaction_amount  #current account balance
+                        account.balance -= transaction_amount  #current account balance
                         account.save()
                         
                         # get account amount money being transferred to
                         receiver = Account.objects.get(id=request.data['receiver'])
                         serializer.validated_data['receiver'] = receiver
                         
-                        receiver.balance = receiver.balance + transaction_amount
+                        receiver.balance += transaction_amount
                         receiver.save()
                         
-                        transaction.account_new_balance = account.balance
-                        transaction.receiver_new_balance = receiver.balance
+                        serializer.validated_data['account_new_balance'] = account.balance
+                        serializer.validated_data['receiver_new_balance'] = receiver.balance
                         transaction = serializer.save()
                         
                         return  Response(

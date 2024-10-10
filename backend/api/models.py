@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.contrib import admin
 
 from .managers import CustomUserManager
 
@@ -62,6 +63,14 @@ class Transaction(models.Model):
     receiver_new_balance = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2) # balance after transaction 
     
     REQUIRED_FIELDS = ['account']
+    
+    @admin.display(description="Balance")
+    def sender_balance(self):
+        return self.account_new_balance
+    
+    @admin.display(description="Receiver Balance")
+    def receiver_balance(self):
+        return self.receiver_new_balance
     
     def __str__(self) -> str:
         return str(self.id)
