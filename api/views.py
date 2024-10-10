@@ -167,7 +167,8 @@ class TransactionList(generics.ListCreateAPIView):
         
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-    
+
+@permission_classes([AllowAny])    
 class RegisterUserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
@@ -182,7 +183,8 @@ class RegisterUserView(generics.ListCreateAPIView):
                 status=status.HTTP_201_CREATED) 
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+@permission_classes([AllowAny])    
 class LoginUserView(APIView):
     
     def post(self, request):
