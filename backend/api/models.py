@@ -20,7 +20,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
     
     def __str__(self) -> str:
-        return str(f"{self.first_name} {self.last_name} - {self.email}")
+        return str(f"{self.username}")
     
     
 class Account(models.Model): 
