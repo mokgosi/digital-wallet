@@ -11,7 +11,7 @@ urlpatterns = [
     path('accounts/<int:account_number>/transactions', views.TransactionRetrieveUpdateDestroy.as_view(), name='account-transactions-retrieve-destroy'),
     
     path('users', views.UserList.as_view(), name='user-list'),
-    # path('<str:username>', views.UserRetrieveUpdateDestroy.as_view(), name='user-retrieve-update-destroy'),
+    path('users/<str:username>', views.UserRetrieveUpdateDestroy.as_view(), name='user-retrieve-update-destroy'),
     
     path('transactions', views.TransactionList.as_view(), name='transactions-history-list'),
     

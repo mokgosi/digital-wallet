@@ -1,21 +1,21 @@
-from django.shortcuts import render
-from rest_framework import generics, status, permissions
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.decorators import api_view, permission_classes
+from django.shortcuts import render # type: ignore
+from rest_framework import generics, status, permissions # type: ignore
+from rest_framework.response import Response # type: ignore
+from rest_framework.views import APIView # type: ignore
+from rest_framework.authtoken.models import Token # type: ignore
+from rest_framework_simplejwt.views import TokenObtainPairView # type: ignore
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly # type: ignore
+from rest_framework.decorators import api_view, permission_classes # type: ignore
 
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate # type: ignore
+from django.contrib.auth.models import User # type: ignore
 
 
 from .models import *
 from .serializers import *
 from .forms import UserRegistrationForm
 
-from django.db.models import F
+from django.db.models import F # type: ignore
 
 import random
 import json
